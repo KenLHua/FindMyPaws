@@ -38,6 +38,7 @@ public class LocationDaoDB implements LocationDao{
     public Location addLocation(Location location) {
         final String INSERT_LOCATION = "INSERT INTO location(name,address,description,latitude,longitude) "
                 + "VALUES(?,?,?,?,?)";
+
         jdbc.update(INSERT_LOCATION,
                 location.getName(),
                 location.getAddress(),

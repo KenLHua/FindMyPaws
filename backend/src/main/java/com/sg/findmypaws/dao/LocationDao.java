@@ -7,8 +7,8 @@ import java.util.List;
 public interface  LocationDao {
     public Location addLocation(Location location);
     public Location getLocationById(int id);
-    public Location updateLocation(Location location);
-    public Location deleteLocationById(int id);
+    public void updateLocation(Location location);
+    public void deleteLocationById(int id);
     public List<Location> getAllLocations();
-    public List<Location> getAllFilteredLocations(Location filter);
+    public List<Location> getAllLocationsWithFilter(Location filter, int radius);
 }

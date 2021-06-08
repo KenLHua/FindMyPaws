@@ -16,8 +16,8 @@ public class AnimalDaoDB implements AnimalDao{
     }
 
     @Override
-    public Animal updateAnimal(Animal animal) {
-        return null;
+    public void updateAnimal(Animal animal) {
+
     }
 
     @Override
