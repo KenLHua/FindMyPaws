@@ -4,3 +4,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.card:hover {
+  transform: scale(1.025);
+  box-shadow: 1px 1px 2px 2px lightgray;
+}
