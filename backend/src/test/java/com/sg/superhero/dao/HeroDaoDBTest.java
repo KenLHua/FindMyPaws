@@ -1,8 +1,5 @@
 package com.sg.superhero.dao;
 
-import com.sg.classroster.model.Course;
-import com.sg.classroster.model.Student;
-import com.sg.classroster.model.Teacher;
 import com.sg.superhero.model.Hero;
 import com.sg.superhero.model.Superpower;
 import org.junit.Before;
