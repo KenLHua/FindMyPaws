@@ -1,9 +1,11 @@
 package com.sg.findmypaws.dao;
 
 import com.sg.findmypaws.model.Animal;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AnimalDaoDB implements AnimalDao{
     @Override
     public Animal addAnimal(Animal animal) {

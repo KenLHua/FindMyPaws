@@ -1,6 +1,5 @@
 package com.sg.superhero.controller;
 
-import com.sg.classroster.model.Teacher;
 import com.sg.superhero.dao.HeroDao;
 import com.sg.superhero.dao.LocationDao;
 import com.sg.superhero.dao.OrganizationDao;
