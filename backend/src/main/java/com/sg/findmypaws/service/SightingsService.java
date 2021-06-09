@@ -30,6 +30,7 @@ public class SightingsService {
         return date.isAfter(past) && date.isBefore(now);
     }
 
+
     public List<Sighting> getAllFilteredSightings(Location loc, int radius, int daysAgo, Animal mockAnimal) {
         List<Sighting> sightings = new ArrayList<>();
         if (loc != null) {
