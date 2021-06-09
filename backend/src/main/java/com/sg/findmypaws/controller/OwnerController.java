@@ -43,7 +43,7 @@ public class OwnerController {
     @PutMapping("/owner/{id}")
     public ResponseEntity<Owner> updateOwnerById(@PathVariable int id, @RequestBody Owner owner){
 
-        owner.setId(id); //set the id of owner to the path variable id
+        //owner.setId(id); //set the id of owner to the path variable id
         Owner fromDao = ownerDao.updateOwner(owner);
 
         if(fromDao == null){
