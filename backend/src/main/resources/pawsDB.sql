@@ -16,10 +16,12 @@ CREATE TABLE animals (
     nametag BOOLEAN,
     species VARCHAR(50),
     breed VARCHAR(50),
+    `date` date,
     female BOOLEAN,
     height FLOAT,
     weight INT,
     age INT,
+    color VARCHAR(30),
     `status` INT NOT NULL, # 1 found, 2 lost, 3 resolved
     `hash` VARCHAR(128) NOT NULL,
     `description` VARCHAR(200),
@@ -56,11 +58,11 @@ INSERT INTO owners(name, phone, email) VALUES
 ("Cooler", "4-489-484-3333", "idestroy@gmail.com");
 
 
-INSERT INTO animals(name, nametag, species, breed, female, height, weight, age, status, hash, description, image, ownerId) 
+INSERT INTO animals(name, nametag, species, breed, female, height, weight, age, status, hash, description, image, ownerId,date,color)
 VALUES
-("Cookie", false, "poodle", "", true, 35, 57, 8, 1, '9484984948948498494h9mum8mu94m9484984u9494h', 'fluffy poodle', 'poodle.jpg', 1),
-("Bookie", true, "shitsu", "", false, 31, 27, 2, 0, '9484984948948498494h9mum8meueue84984u9494h', 'fluffy shitsu', 'shitsu.jpg', 2),
-("Sookie", true, "boxer", "", false, 42, 42, 12, 2, '948498494894oeoeuoaaauui8meueue84984u9494h', 'big boi', 'boxer.jpg', 3);
+("Cookie", false, "poodle", "", true, 35, 57, 8, 1, '9484984948948498494h9mum8mu94m9484984u9494h', 'fluffy poodle', 'poodle.jpg', 1, NOW(),"black"),
+("Bookie", true, "shitsu", "", false, 31, 27, 2, 0, '9484984948948498494h9mum8meueue84984u9494h', 'fluffy shitsu', 'shitsu.jpg', 2,NOW(),"red"),
+("Sookie", true, "boxer", "", false, 42, 42, 12, 2, '948498494894oeoeuoaaauui8meueue84984u9494h', 'big boi', 'boxer.jpg', 3, NOW(),"green");
 
 INSERT INTO locations (
 	name,
@@ -73,7 +75,7 @@ INSERT INTO locations (
     ("Earth","All of them (very helpful)",-56.22336,168.54247,"mostly harmless"),
     ("Kent Farm Barn","34 Country Rd Takmeom, W. VA 00000",80.08563,-160.44519,"superboy's main hang"),
     ("Olympus","Greece?",38.297634,-75.22866,"big mountain, seat of universal power, invisible: can't miss it");
-    
+
 INSERT INTO sightings (
 	animalId,
     locationId,
@@ -83,6 +85,4 @@ VALUES
 	(1,3,"2021-06-01 00:00:00.000000"),
     (2,2,"2021-05-31 00:00:00.000000"),
     (3,1,"2021-01-01 00:00:00.000000");
-
-
 
