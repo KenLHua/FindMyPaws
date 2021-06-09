@@ -43,6 +43,7 @@ public class OwnerController {
     @PutMapping("/owner/{id}")
     public ResponseEntity<Owner> updateOwnerById(@PathVariable int id, @RequestBody Owner owner){
 
+        owner.setId(id); //set the id of owner to the path variable id
         Owner fromDao = ownerDao.updateOwner(owner);
 
         if(fromDao == null){
@@ -55,7 +56,7 @@ public class OwnerController {
     }
 
     @DeleteMapping("owner/{id}")
-    public ResponseEntity<Owner> deleteOwnerById(@PathVariable int id, @RequestBody Owner owner){
+    public ResponseEntity<Owner> deleteOwnerById(@PathVariable int id){
 
         Owner fromDao = ownerDao.deleteOwnerById(id);
 
@@ -68,7 +69,7 @@ public class OwnerController {
         return response;
     }
 
-    @GetMapping("owner")
+    @GetMapping("owners")
     public ResponseEntity<List<Owner>> getAllOwners(){
 
         List<Owner> owners = ownerDao.getAllOwners();
