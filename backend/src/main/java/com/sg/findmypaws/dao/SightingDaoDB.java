@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class SightingDaoDB implements SightingDao{
             sighting.setId(resultSet.getInt("id"));
             sighting.setLocationId(resultSet.getInt("locationId"));
             sighting.setAnimalId(resultSet.getInt("personId"));
-            sighting.setDate(resultSet.getDate("date"));
+            sighting.setDate(resultSet.getDate("date").toLocalDate());
 
             return sighting;
         }
@@ -48,7 +49,7 @@ public class SightingDaoDB implements SightingDao{
 
             statement.setInt(1, sighting.getLocationId());
             statement.setInt(2, sighting.getAnimalId());
-            statement.setDate(3, (Date) sighting.getDate());
+            statement.setDate(3, Date.valueOf(sighting.getDate()));
             return statement;
 
         }, keyHolder);
