@@ -33,7 +33,7 @@ public class SightingDaoDB implements SightingDao{
 
             sighting.setId(resultSet.getInt("id"));
             sighting.setLocationId(resultSet.getInt("locationId"));
-            sighting.setAnimalId(resultSet.getInt("personId"));
+            sighting.setAnimalId(resultSet.getInt("animalId"));
             sighting.setDate(resultSet.getDate("date").toLocalDate());
 
             return sighting;
