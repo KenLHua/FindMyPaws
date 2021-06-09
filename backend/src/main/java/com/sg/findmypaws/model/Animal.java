@@ -1,28 +1,32 @@
 package com.sg.findmypaws.model;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class Animal {
     public int id;
     public Owner owner;
-    public Date date;
+    public LocalDate date;
     public int status;
-
 
     public String name;
     public String breed;
-
     public String species;
     public String color;
     public String description;
+
     public String hash;
+
+    public String image;
     public int height;
     public int weight;
 
 
     public int age;
-    public boolean female;
-    public boolean nameTag;
+    public Boolean female;
+    public Boolean nameTag;
+
 
 
 
@@ -42,11 +46,11 @@ public class Animal {
         this.owner = owner;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -75,7 +79,7 @@ public class Animal {
         this.status = status;
     }
 
-    public boolean hasNameTag() {
+    public Boolean hasNameTag() {
         return nameTag;
     }
 
@@ -132,8 +136,16 @@ public class Animal {
         this.weight = weight;
     }
 
-    public boolean isFemale() {
+    public Boolean isFemale() {
         return female;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setFemale(boolean female) {
@@ -148,12 +160,38 @@ public class Animal {
         this.description = description;
     }
 
-    // Todo: public Image image
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return id == animal.id && status == animal.status && height == animal.height && weight == animal.weight && age == animal.age && Objects.equals(owner, animal.owner) && Objects.equals(date, animal.date) && Objects.equals(name, animal.name) && Objects.equals(breed, animal.breed) && Objects.equals(species, animal.species) && Objects.equals(color, animal.color) && Objects.equals(description, animal.description) && Objects.equals(hash, animal.hash) && Objects.equals(image, animal.image) && Objects.equals(female, animal.female) && Objects.equals(nameTag, animal.nameTag);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, owner, date, status, name, breed, species, color, description, hash, image, height, weight, age, female, nameTag);
+    }
 
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", date=" + date +
+                ", status=" + status +
+                ", name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", species='" + species + '\'' +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", hash='" + hash + '\'' +
+                ", image='" + image + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", age=" + age +
+                ", female=" + female +
+                ", nameTag=" + nameTag +
+                '}';
+    }
 }
