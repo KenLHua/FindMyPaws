@@ -1,6 +1,7 @@
 package com.sg.findmypaws.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Sighting {
     public int id;
@@ -8,7 +9,7 @@ public class Sighting {
 //    public Animal animal;
     public int locationId;
     public int animalId;
-    public Date date;
+    public LocalDate date;
 
     public int getId() {
         return id;
@@ -34,11 +35,11 @@ public class Sighting {
         this.animalId = animalId;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
