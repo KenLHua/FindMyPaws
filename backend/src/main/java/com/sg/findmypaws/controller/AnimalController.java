@@ -6,16 +6,14 @@ import com.sg.findmypaws.dao.OwnerDao;
 import com.sg.findmypaws.dao.SightingDao;
 import com.sg.findmypaws.model.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class AnimalController {
     @Autowired
     AnimalDao animalDao;
@@ -44,13 +42,13 @@ public class AnimalController {
     }
 
     @DeleteMapping("deleteAnimal")
-    public String deleteAnimal(Integer id) {
+    public String deleteAnimal(Integer id) throws SQLException {
         animalDao.deleteAnimalById(id);
         return "redirect:/animals";
     }
 
     @PutMapping("editAnimal")
-    public String editAnimal(Animal input, HttpServletRequest request){
+    public String editAnimal(Animal input, HttpServletRequest request)throws SQLException{
         // Todo: create animal object
         Animal animal = new Animal();
 
