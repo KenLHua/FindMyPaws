@@ -2,9 +2,11 @@ package com.sg.findmypaws.dao;
 
 import com.sg.findmypaws.model.Animal;
 import com.sg.findmypaws.model.Sighting;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class SightingDaoDB implements SightingDao{
     @Override
     public Sighting addSighting(Sighting sighting) {
