@@ -36,28 +36,25 @@ public class LocationDaoDB implements LocationDao{
 
     @Override
     public List<Location> getAllLocationsWithFilter(Location filter, int radius) {
-        final String SELECT_ALL_LOCATION_WITH_FILTER = "SELECT id, "
+        final String SELECT_ALL_LOCATION_WITH_FILTER = "SELECT *, "
             + "( 3959 * acos " +
                 "( cos ( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin ( radians(?) ) * sin( radians( latitude ) ))) AS distance"
-            + "FROM locations"
-            + "HAVING distance < ?"
-            + "ORDER BY distance"
-            + "LIMIT 0 , 20;";
+            + " FROM locations"
+            + " HAVING distance < ?"
+            + " ORDER BY distance"
+            + " LIMIT 0 , 20;";
 
-        jdbc.update(SELECT_ALL_LOCATION_WITH_FILTER,
-                filter.getLatitude(),
-                filter.getLongitude(),
-                filter.getLatitude(),
-                radius);
+        System.out.println(SELECT_ALL_LOCATION_WITH_FILTER);
 
-        return jdbc.query(SELECT_ALL_LOCATION_WITH_FILTER, new LocationDaoDB.LocationMapper());
+        return jdbc.query(SELECT_ALL_LOCATION_WITH_FILTER, new LocationDaoDB.LocationMapper(),
+                filter.getLatitude(), filter.getLongitude(), filter.getLatitude(), radius);
     }
 
     @Override
     @Transactional
     public Location addLocation(Location location) {
-        final String INSERT_LOCATION = "INSERT INTO locations(name,latitude,longitude,?) "
-                + "VALUES(?,?,?,?)";
+        final String INSERT_LOCATION = "INSERT INTO locations(name,latitude,longitude,address, description) "
+                + "VALUES(?,?,?,?,?)";
         jdbc.update(INSERT_LOCATION,
                 location.getName(),
                 location.getLatitude(),
@@ -72,7 +69,7 @@ public class LocationDaoDB implements LocationDao{
 
     @Override
     public void updateLocation(Location location) {
-        final String UPDATE_LOCATION = "UPDATE locations SET Name = ?, address = ? , Description = ? , latitude = ? ,"
+        final String UPDATE_LOCATION = "UPDATE locations SET `name` = ?, address = ? , `description` = ? , latitude = ? ,"
                 +"longitude = ? "
                 + "WHERE id = ?";
         jdbc.update(UPDATE_LOCATION,
@@ -97,9 +94,10 @@ public class LocationDaoDB implements LocationDao{
 
         @Override
         public Location mapRow(ResultSet rs, int index) throws SQLException {
+            System.out.println("Ken" + rs.getString("name"));
             Location location = new Location();
             location.setId(rs.getInt("id"));
-            location.setName(rs.getString("Name"));
+            location.setName(rs.getString("name"));
             location.setAddress(rs.getString("Address"));
             location.setDescription(rs.getString("Description"));
             location.setLatitude(rs.getFloat("Latitude"));

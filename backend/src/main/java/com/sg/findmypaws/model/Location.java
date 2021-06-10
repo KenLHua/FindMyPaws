@@ -3,12 +3,12 @@ package com.sg.findmypaws.model;
 import java.util.Objects;
 
 public class Location {
-    public int id;
-    public String name;
-    public float latitude;
-    public float longitude;
-    public String address;
-    public String description;
+    private int id;
+    private String name;
+    private float latitude;
+    private float longitude;
+    private String address;
+    private String description;
 
     public int getId() {
         return id;
@@ -69,5 +69,17 @@ public class Location {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, latitude, longitude, address, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
