@@ -1,14 +1,21 @@
 package com.sg.findmypaws.dao;
 
 import com.sg.findmypaws.TestApplicationConfiguration;
+import com.sg.findmypaws.model.Animal;
 import com.sg.findmypaws.model.Location;
+import com.sg.findmypaws.model.Owner;
+import com.sg.findmypaws.model.Sighting;
+import com.sg.findmypaws.service.LocationsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,10 +25,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class LocationDaoDBTest {
 
     @Autowired
+    LocationsService locationsService;
+
+    @Autowired
     LocationDao locationDao;
+
+    @Autowired
+    AnimalDao animalDao;
+
+    @Autowired
+    OwnerDao ownerDao;
+
+    @Autowired
+    SightingDao sightingDao;
 
     @BeforeEach
     void setup(){
+        List<Sighting> sightings = sightingDao.getAllSightings();
+        for( Sighting sight: sightings){
+            try {
+                sightingDao.deleteSightingById(sight.getId());
+            }catch (SQLException e){}
+        }
         List<Location> locations = locationDao.getAllLocations();
         for( Location loc: locations){
             locationDao.deleteLocationById(loc.getId());
@@ -76,8 +101,6 @@ class LocationDaoDBTest {
         loc = locationDao.addLocation(loc);
 
         Location fromDao = locationDao.getLocationById(loc.getId());
-        System.out.println(loc);
-        System.out.println(fromDao);
         assertEquals(loc,fromDao);
     }
 
@@ -105,5 +128,59 @@ class LocationDaoDBTest {
 
     @Test
     void deleteLocationById() {
+        Owner owner = new Owner();
+        owner.setEmail("email@gmail.com");
+        owner.setPhone("18001234567");
+        owner.setName("Ken");
+        owner = ownerDao.addOwner(owner);
+
+        Animal animal = new Animal();
+        animal.setOwner(owner);
+        animal.setDate(LocalDate.now());
+        animal.setStatus(0);
+        animal.setName("Bill");
+        animal.setBreed("german shepard");
+        animal.setSpecies("dog");
+        animal.setColor("color");
+        animal.setDescription("desc");
+        animal.setHash("hashstring");
+        animal.setImage("image");
+        animal.setHeight(10);
+        animal.setWeight(10);
+        animal.setAge(1);
+        animal.setFemale(true);
+        animal.setNameTag(true);
+        animalDao.addAnimal(animal);
+
+        Location loc = new Location();
+        loc.setName("Howling Rays'");
+        loc.setAddress("727 N Broadway #128, Los Angeles, CA 90012");
+        loc.setLatitude( (float) 34.0613);
+        loc.setLongitude( (float) -118.239);
+        loc.setDescription("Description");
+        loc = locationDao.addLocation(loc);
+
+        Sighting sighting = new Sighting();
+        sighting.setDate(LocalDate.now());
+        sighting.setLocationId(loc.getId());
+        sighting.setAnimalId(animal.getId());
+        sighting = sightingDao.addSighting(sighting);
+
+        Sighting sightFromDao = null;
+        try {
+            sightFromDao = sightingDao.getSightingById(sighting.getId());
+        }catch(SQLException e){}
+
+        assertEquals(sightFromDao, sighting);
+
+        locationsService.deleteLocationById(loc.getId());
+        sightFromDao = null;
+        try {
+            sightFromDao = sightingDao.getSightingById(sighting.getId());
+        }catch(SQLException e){}
+
+        assertNull(sightFromDao);
+
+
     }
 }

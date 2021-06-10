@@ -2,6 +2,7 @@ package com.sg.findmypaws.model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Sighting {
     public int id;
@@ -41,5 +42,18 @@ public class Sighting {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sighting sighting = (Sighting) o;
+        return id == sighting.id && locationId == sighting.locationId && animalId == sighting.animalId && Objects.equals(date, sighting.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, locationId, animalId, date);
     }
 }

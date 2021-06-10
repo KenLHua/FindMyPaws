@@ -44,7 +44,6 @@ public class LocationDaoDB implements LocationDao{
             + " ORDER BY distance"
             + " LIMIT 0 , 20;";
 
-        System.out.println(SELECT_ALL_LOCATION_WITH_FILTER);
 
         return jdbc.query(SELECT_ALL_LOCATION_WITH_FILTER, new LocationDaoDB.LocationMapper(),
                 filter.getLatitude(), filter.getLongitude(), filter.getLatitude(), radius);
@@ -94,7 +93,6 @@ public class LocationDaoDB implements LocationDao{
 
         @Override
         public Location mapRow(ResultSet rs, int index) throws SQLException {
-            System.out.println("Ken" + rs.getString("name"));
             Location location = new Location();
             location.setId(rs.getInt("id"));
             location.setName(rs.getString("name"));

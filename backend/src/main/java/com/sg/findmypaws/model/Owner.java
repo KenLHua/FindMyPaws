@@ -3,10 +3,10 @@ package com.sg.findmypaws.model;
 import java.util.Objects;
 
 public class Owner {
-    public int id;
-    public String name;
-    public String phone;
-    public String email;
+    private int id;
+    private String name;
+    private String phone;
+    private String email;
 
     public int getId() {
         return id;

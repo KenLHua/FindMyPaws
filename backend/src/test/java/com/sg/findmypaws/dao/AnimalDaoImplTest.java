@@ -2,6 +2,7 @@ package com.sg.findmypaws.dao;
 
 import com.sg.findmypaws.TestApplicationConfiguration;
 import com.sg.findmypaws.model.Animal;
+import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Owner;
 import com.sg.findmypaws.model.Sighting;
 import com.sg.findmypaws.service.AnimalsService;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.SQLException;
@@ -56,7 +58,6 @@ class AnimalDaoImplTest {
             try{animalDao.deleteAnimalById(animal.getId());}catch(SQLException e){}
 
         }
-        System.out.println("hello Ken");
 
         List<Owner> owners = ownerDao.getAllOwners();
         for( Owner owner : owners){
@@ -96,6 +97,7 @@ class AnimalDaoImplTest {
         Animal fromDao = null;
         try {
             fromDao = animalDao.getAnimalById(animal.getId());
+            fromDao.setOwner(animalsService.getOwnerForAnimal(fromDao));
         }catch(SQLException e){
             assertFalse(true, "there was an error");
             System.err.println(e);
@@ -141,8 +143,6 @@ class AnimalDaoImplTest {
             System.err.println(e);
         }
 
-        System.out.println(animal.toString());
-        System.out.println(fromDao.toString());
 
 
         assertEquals(animal,fromDao);
@@ -222,9 +222,12 @@ class AnimalDaoImplTest {
         animal2.setAge(1);
         animal2.setFemale(true);
         animal2.setNameTag(true);
-
         animalDao.addAnimal(animal2);
+
         List<Animal> animals = animalDao.getAllAnimals();
+        for( Animal an : animals){
+            an.setOwner(animalsService.getOwnerForAnimal(an));
+        }
         assertTrue(animals.size() == 2);
         assertTrue(animals.contains(animal));
         assertTrue(animals.contains(animal2));
@@ -232,6 +235,55 @@ class AnimalDaoImplTest {
 
     @Test
     void serviceDelete(){
+        // Todo: test to cascade delete sightings
+        Owner owner = new Owner();
+        owner.setEmail("email@gmail.com");
+        owner.setPhone("18001234567");
+        owner.setName("Ken");
+        owner = ownerDao.addOwner(owner);
+
+        Animal animal = new Animal();
+        animal.setOwner(owner);
+        animal.setDate(LocalDate.now());
+        animal.setStatus(0);
+        animal.setName("Bill");
+        animal.setBreed("german shepard");
+        animal.setSpecies("dog");
+        animal.setColor("color");
+        animal.setDescription("desc");
+        animal.setHash("hashstring");
+        animal.setImage("image");
+        animal.setHeight(10);
+        animal.setWeight(10);
+        animal.setAge(1);
+        animal.setFemale(true);
+        animal.setNameTag(true);
+        animalDao.addAnimal(animal);
+
+        Location loc = new Location();
+        loc.setName("Howling Rays'");
+        loc.setAddress("727 N Broadway #128, Los Angeles, CA 90012");
+        loc.setLatitude( (float) 34.0613);
+        loc.setLongitude( (float) -118.239);
+        loc.setDescription("Description");
+        loc = locationDao.addLocation(loc);
+
+        Sighting sighting = new Sighting();
+        sighting.setDate(LocalDate.now());
+        sighting.setLocationId(loc.getId());
+        sighting.setAnimalId(animal.getId());
+        sighting = sightingDao.addSighting(sighting);
+
+        try {
+            Sighting fromDao = sightingDao.getSightingById(sighting.getId());
+            assertEquals(sighting,fromDao);
+            animalsService.deleteAnimalById(animal.getId());
+            try {
+                fromDao = null;
+                fromDao = sightingDao.getSightingById(sighting.getId());
+            }catch(EmptyResultDataAccessException e){}
+            assertNull(fromDao); // sightingDao should not return anything, should be error
+        }catch (SQLException e){}
 
     }
 }

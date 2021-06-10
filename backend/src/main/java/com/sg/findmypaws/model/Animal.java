@@ -5,27 +5,27 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Animal {
-    public int id;
-    public Owner owner;
-    public LocalDate date;
-    public int status;
+    private int id;
+    private Owner owner;
+    private LocalDate date;
+    private int status;
 
-    public String name;
-    public String breed;
-    public String species;
-    public String color;
-    public String description;
+    private String name;
+    private String breed;
+    private String species;
+    private String color;
+    private String description;
 
-    public String hash;
+    private String hash;
 
-    public String image;
-    public int height;
-    public int weight;
+    private String image;
+    private int height;
+    private int weight;
 
 
-    public int age;
-    public Boolean female;
-    public Boolean nameTag;
+    private int age;
+    private Boolean female;
+    private Boolean nameTag;
 
 
 
