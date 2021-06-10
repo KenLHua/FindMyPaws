@@ -95,8 +95,8 @@ public class AnimalsService {
                 System.err.println("Could not delete "+sighting.getId());
             }
         }
-        animalDao.deleteAnimalById(animal.getId());
         ownerDao.deleteOwnerById(getOwnerForAnimal(animal).getId());
+        animalDao.deleteAnimalById(animal.getId());
 
     }
 
