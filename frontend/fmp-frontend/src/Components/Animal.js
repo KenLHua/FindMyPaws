@@ -15,35 +15,37 @@ class Animal extends Component {
     render() {
         if (this.state.dateFound == "") {
             return (
-                <button className="btn p-0 mb-3 ml-0 mr-0">
-                    <div className="card border border-dark m-0">
-                        <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
-                        <div className="card-body">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-4 rounded p-0">
-                                        <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
-                                    </div>
-                                    <div className="col-8">
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-12 text-left">
-                                                    Date Lost:
+                <div className="col-6">
+                    <button className="btn p-0 mb-3 ml-0 mr-0">
+                        <div className="card border border-dark m-0">
+                            <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
+                            <div className="card-body">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-4 rounded p-0">
+                                            <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
+                                        </div>
+                                        <div className="col-8">
+                                            <div className="container">
+                                                <div className="row">
+                                                    <div className="col-12 text-left">
+                                                        Date Lost:
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-right">
-                                                    <p>{this.state.dateLost}</p>
+                                                <div className="row">
+                                                    <div className="col-12 text-right">
+                                                        <p>{this.state.dateLost}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-left">
-                                                    Last Seen:
+                                                <div className="row">
+                                                    <div className="col-12 text-left">
+                                                        Last Seen:
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-right">
-                                                    <p>{this.state.lastSeen}</p>
+                                                <div className="row">
+                                                    <div className="col-12 text-right">
+                                                        <p>{this.state.lastSeen}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,41 +53,43 @@ class Animal extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </button>
+                    </button>
+                </div>
             )
         }
         else {
             return (
-                <button className="btn p-0 mb-3 ml-0 mr-0">
-                    <div className="card border border-dark m-0"> 
-                        <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
-                        <div className="card-body">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-4 rounded p-0">
-                                        <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
-                                    </div>
-                                    <div className="col-8">
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-12 text-left">
-                                                    Date Found:
+                <div className="col-6">
+                    <button className="btn p-0 mb-3 ml-0 mr-0">
+                        <div className="card border border-dark m-0"> 
+                            <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
+                            <div className="card-body">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-4 rounded p-0">
+                                            <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
+                                        </div>
+                                        <div className="col-8">
+                                            <div className="container">
+                                                <div className="row">
+                                                    <div className="col-12 text-left">
+                                                        Date Found:
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-right">
-                                                    <p>{this.state.dateFound}</p>
+                                                <div className="row">
+                                                    <div className="col-12 text-right">
+                                                        <p>{this.state.dateFound}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-left">
-                                                    Current Location:
+                                                <div className="row">
+                                                    <div className="col-12 text-left">
+                                                        Current Location:
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-12 text-right">
-                                                    <p>{this.state.currentLocation}</p>
+                                                <div className="row">
+                                                    <div className="col-12 text-right">
+                                                        <p>{this.state.currentLocation}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,8 +97,8 @@ class Animal extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </button>
+                    </button>
+                </div>
             )
         }
     }

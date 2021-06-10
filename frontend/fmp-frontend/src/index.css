@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,7 +15,14 @@ body {
   box-shadow: 1px 1px 2px 2px lightgray;
 }
 
-#lostAnimals {
-  max-height: 600px;
+#lostAnimals, #foundAnimals {
+  max-height: 35rem;
+  min-height: 35rem;
+  overflow-y: scroll;
+}
+
+#recentSightings {
+  max-height: 475px;
+  min-height: 475px;
   overflow-y: scroll;
 }
