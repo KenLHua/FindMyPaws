@@ -40,6 +40,7 @@ public class AnimalsService {
 
     public boolean compareAnimal(Animal curr, Animal filterAnimal){
         boolean nameMatch = true;
+        boolean speciesMatch = true;
         boolean breedMatch = true;
         boolean femaleMatch = true;
         boolean nameTagMatch = true;
@@ -48,14 +49,19 @@ public class AnimalsService {
         boolean weightMatch = true;
         boolean dateMatch = true;
 
-        if(filterAnimal.getName() != null)
-            nameMatch = curr.getName() == filterAnimal.getName();
         if(filterAnimal.getBreed() != null)
-            breedMatch = curr.getBreed() == filterAnimal.getBreed();
+            breedMatch = curr.getBreed().equals(filterAnimal.getBreed());
+        if(filterAnimal.getSpecies() != null)
+            speciesMatch = curr.getSpecies().equals(filterAnimal.getSpecies());
         if(filterAnimal.isFemale() != null)
-            femaleMatch = (curr.isFemale() ==filterAnimal.isFemale());
+            femaleMatch = (curr.isFemale() == filterAnimal.isFemale());
         if(filterAnimal.hasNameTag() != null)
-            nameTagMatch = (curr.isFemale() == filterAnimal.hasNameTag());
+            nameTagMatch = (curr.hasNameTag() == filterAnimal.hasNameTag());
+        if(filterAnimal.getName() != null && filterAnimal.hasNameTag() != null) {
+            nameMatch = curr.getName().equals(filterAnimal.getName());
+            nameMatch = ! nameTagMatch || nameMatch; // equivalent to if then
+        }
+
         if(filterAnimal.getColor() != null)
             colorMatch = filterAnimal.getColor().equals(curr.getColor());
         if(filterAnimal.getHeight() > -1)
@@ -65,7 +71,7 @@ public class AnimalsService {
         if(filterAnimal.getDate() != null)
             dateMatch = curr.getDate().isAfter(filterAnimal.getDate());
 
-        return (nameMatch && breedMatch && femaleMatch && colorMatch && heightMatch && weightMatch && nameTagMatch && dateMatch);
+        return (nameMatch && speciesMatch && breedMatch && femaleMatch && colorMatch && heightMatch && weightMatch && nameTagMatch && dateMatch);
     }
 
     public Animal getAnimalById(int id) throws SQLException{
