@@ -1,20 +1,20 @@
 package com.sg.findmypaws.service;
 
-import com.sg.findmypaws.dao.AnimalDao;
-import com.sg.findmypaws.dao.OwnerDao;
-import com.sg.findmypaws.dao.OwnerDaoDB;
-import com.sg.findmypaws.dao.SightingDao;
+import com.sg.findmypaws.dao.*;
 import com.sg.findmypaws.model.Animal;
+import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Owner;
 import com.sg.findmypaws.model.Sighting;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +31,9 @@ public class AnimalsService {
 
     @Autowired
     JdbcTemplate jdbc;
+
+    @Autowired
+    LocationDao locationDao;
 
     // Todo: untested
     public List<Animal> filterAnimals(Animal filterAnimal, boolean useFemale, boolean useNameTag){
@@ -98,6 +101,11 @@ public class AnimalsService {
         ownerDao.deleteOwnerById(getOwnerForAnimal(animal).getId());
         animalDao.deleteAnimalById(animal.getId());
 
+
+
+
+
+
     }
 
 
@@ -107,18 +115,54 @@ public class AnimalsService {
         Owner owner = ownerDao.getOwnerById(ownerId);
         return owner;
     }
-    public Animal addAnimal(Animal animal) throws SQLIntegrityConstraintViolationException, SQLException{
+    public Animal addAnimal(Location location, LocalDate date, Animal animal) throws SQLIntegrityConstraintViolationException, SQLException{
         Owner owner = animal.getOwner();
-        // Make sure owner exists
-        if(owner == null|| ownerDao.getOwnerById(owner.getId()) == null){
-            throw new SQLIntegrityConstraintViolationException("Owner does not exist for Animal");
-        }
 
+
+        if(!isOwnerValid(owner)){
+            throw new SQLException("Could not add new animal because owner is incomplete");
+        }
+        ownerDao.addOwner(owner);
+        animal.setOwner(owner);
         animal = animalDao.addAnimal(animal);
+
+
+        locationDao.addLocation(location);
+        Sighting sighting = new Sighting();
+        sighting.setAnimalId(animal.getId());
+        sighting.setLocationId(location.getId());
+        sighting.setDate(date);
+        sightingDao.addSighting(sighting);
+
+
         try {
             return this.getAnimalById(animal.getId());
         }catch (SQLException e){
             throw new SQLException("Could not retrieve newly created animal");
+        }
+
+
+
+    }
+
+    public void updateAnimal(Animal animal) throws DataIntegrityViolationException, AccessDeniedException{
+        Owner fromDaoOwner = ownerDao.getOwnerById(animal.getOwner().getId());
+        if(!fromDaoOwner.equals(animal.getOwner())){
+            throw new DataIntegrityViolationException("Owner is invalid");
+        }
+        try {
+            if (!animal.getHash().equals(this.getAnimalById(animal.getId()).getHash())){
+                throw new AccessDeniedException("Incorrect hash");
+            }
+        }catch (SQLException e ){
+            throw new EmptyResultDataAccessException(0);
+        }
+
+        try{
+            animalDao.updateAnimal(animal);
+        }
+        catch(SQLException e){
+            throw new EmptyResultDataAccessException(0);
         }
 
 
@@ -131,4 +175,20 @@ public class AnimalsService {
         }
         return animals;
     }
+    public boolean isOwnerValid(Owner owner){
+        if(owner == null) return false;
+        if (((owner.getPhone() != null) || (owner.getEmail() != null)) && owner.getName() != null) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean isAnimalValid(Animal animal){
+        if(animal == null) return false;
+        if(animal.getHash() != null && animal.getStatus() != null && animal.getStatus() > 0)
+            return true;
+        return false;
+    };
+
 }
