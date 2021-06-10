@@ -2,6 +2,7 @@ package com.sg.findmypaws.controller;
 
 import com.sg.findmypaws.dao.SightingDaoDB;
 import com.sg.findmypaws.model.Animal;
+import com.sg.findmypaws.model.Filter;
 import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Sighting;
 import com.sg.findmypaws.service.SightingsService;
@@ -21,15 +22,15 @@ public class SightingController {
 private final SightingsService service;
 private final SightingDaoDB daoDB;
 
-@Autowired
+    @Autowired
     public SightingController(SightingsService service, SightingDaoDB daoDB) {
-    this.service = service;
-    this.daoDB = daoDB;
-}
+        this.service = service;
+        this.daoDB = daoDB;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Sighting> addSighting(@RequestBody Sighting sighting) {
-    return new ResponseEntity(daoDB.addSighting(sighting), HttpStatus.CREATED);
+        return new ResponseEntity(daoDB.addSighting(sighting), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -37,41 +38,36 @@ private final SightingDaoDB daoDB;
         return new ResponseEntity(daoDB.getSightingById(id), HttpStatus.FOUND);
 }
 
-        @GetMapping("/all")
+    @GetMapping("/all")
     public List<Sighting> getAllSightings() {
         return daoDB.getAllSightings();
     }
-// Location loc, int radius, int daysAgo, Animal mockAnimal
-    private class Filter {
-    Location loc;
-    int radius;
-    int daysAgo;
-    Animal mockAnimal;
-    }
+
+    // Location loc, int radius, int daysAgo, Animal mockAnimal
+
 
     @GetMapping("/filtered")
     public List<Sighting> getAllSightingsWithFilters(@RequestBody Filter filter) {
         return service.getAllFilteredSightings(filter.loc, filter.radius, filter.daysAgo, filter.mockAnimal);
 }
 
-   @GetMapping("/filtered/{locId}")
-   public List<Sighting> getAllSightingsByLocId(@PathVariable int locId) {
+   @GetMapping("/filtered/location/{locId}")
+   public List<Sighting> getAllSightingsByLocId(@PathVariable int locId)  {
         return daoDB.getAllSightingsByLocId(locId);
-
 }
 
-@GetMapping("/filtered/{animalId}")
-public List<Sighting> getAllSightingsByAnimalId(@PathVariable int animalId) {
-    return daoDB.getAllSightingsByAnimalId(animalId);
+    @GetMapping("/filtered/animal/{animalId}")
+    public List<Sighting> getAllSightingsByAnimalId(@PathVariable int animalId) {
+        return daoDB.getAllSightingsByAnimalId(animalId);
 }
 
-@PutMapping("/update")
-public void updateSighting(@RequestBody Sighting sighting) throws SQLException{
-daoDB.updateSighting(sighting);
+    @PutMapping("/update")
+    public void updateSighting(@RequestBody Sighting sighting) throws SQLException{
+        daoDB.updateSighting(sighting);
 }
 
-@PostMapping("/delete/{id}")
-public void deleteSighting(@PathVariable int id) throws SQLException {
-daoDB.deleteSightingById(id);
+    @PostMapping("/delete/{id}")
+    public void deleteSighting(@PathVariable int id) throws SQLException {
+        daoDB.deleteSightingById(id);
 }
 }

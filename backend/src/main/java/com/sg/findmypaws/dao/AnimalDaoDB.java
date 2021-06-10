@@ -51,13 +51,13 @@ public class AnimalDaoDB implements AnimalDao{
     public Animal getAnimalById(int id) {
         final String SELECT_ANIMAL_BY_ID = "SELECT * FROM animals WHERE id = ?;";
         try{
-
             Animal animal = jdbc.queryForObject(SELECT_ANIMAL_BY_ID, new AnimalMapper(), id);
             return animal;
-        }catch (DataAccessException e){
+        }
+        catch (DataAccessException e){
+            e.printStackTrace();
             return null;
         }
-
     }
 
     @Override

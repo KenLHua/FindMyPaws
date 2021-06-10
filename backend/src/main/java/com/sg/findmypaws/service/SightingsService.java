@@ -30,7 +30,6 @@ public class SightingsService {
         return date.isAfter(past) && date.isBefore(now);
     }
 
-
     public List<Sighting> getAllFilteredSightings(Location loc, int radius, int daysAgo, Animal mockAnimal) {
         List<Sighting> sightings = new ArrayList<>();
         if (loc != null) {
@@ -39,20 +38,21 @@ public class SightingsService {
                 sightings.addAll(sightingDaoDB.getAllSightingsByLocId(l.getId()));
             }
         }
+
         else {
             sightings = sightingDaoDB.getAllSightings();
         }
 
-        if (daysAgo != -1) {
+        if (daysAgo != -1 && ! sightings.isEmpty()) {
             LocalDate now = LocalDate.now();
             LocalDate past = now.minusDays(daysAgo);
-            sightings.removeIf(s -> !betweenTwoDates(s.date, now, past));
+            sightings.removeIf(s -> ! betweenTwoDates(s.date, now, past));
         }
-
-        if (mockAnimal != null)
+        System.out.println("sightings : " + sightings);
+        if (mockAnimal != null && ! sightings.isEmpty())
         {
-            sightings.removeIf(s -> animalsService.compareAnimal(
-                    animalDaoDB.getAnimalById(s.getAnimalId()) , mockAnimal));
+            sightings.removeIf(s -> ! animalsService.compareAnimal(
+                    animalDaoDB.getAnimalById(s.getAnimalId()), mockAnimal));
         }
 
         return sightings;
