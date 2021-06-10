@@ -55,4 +55,14 @@ public class Owner {
     public int hashCode() {
         return Objects.hash(id, name, phone, email);
     }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

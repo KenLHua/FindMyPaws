@@ -1,60 +1,77 @@
 package com.sg.findmypaws.controller;
 
 import com.sg.findmypaws.dao.AnimalDao;
-import com.sg.findmypaws.dao.LocationDao;
-import com.sg.findmypaws.dao.OwnerDao;
-import com.sg.findmypaws.dao.SightingDao;
 import com.sg.findmypaws.model.Animal;
+import com.sg.findmypaws.service.AnimalsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/animal")
 public class AnimalController {
     @Autowired
     AnimalDao animalDao;
 
     @Autowired
-    LocationDao locationDao;
+    AnimalsService animalsService;
 
-    @Autowired
-    OwnerDao ownerDao;
 
-    @Autowired
-    SightingDao sightingDao;
-
-    @GetMapping("animals")
-    public String displayAnimals(Model model){
-        // Todo: get all animals, pass it to model as attribute
-        return null;
+    @GetMapping("/animals")
+    public List<Animal> getAllAnimals(){
+        return animalsService.getAllAnimals();
     }
 
-    @PostMapping("addAnimal")
-    public String addAnimal(Animal input, HttpServletRequest request){
-        // Todo: create animal object
-        Animal animal = new Animal();
-        // Set all class fields
-        return null;
+    @GetMapping("/getAnimal/{id}")
+    public Animal getAnimal(@PathVariable int id){
+        try{
+            Animal animal =animalsService.getAnimalById(id);
+            //animal.setHash("Hidden hash");
+            return animal;
+        }catch (SQLException e){
+            throw new EmptyResultDataAccessException(0);
+        }
+    }
+    @PostMapping("/addAnimal")
+    public ResponseEntity<Animal> addAnimal(@RequestBody Animal animal, HttpServletRequest request){
+        try {
+            animal = animalsService.addAnimal(animal);
+            return new ResponseEntity<Animal>(animal, HttpStatus.CREATED);
+        }catch (SQLIntegrityConstraintViolationException e){ // Owner does not exist for animal
+            return new ResponseEntity<Animal>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        catch(SQLException e){
+            return new ResponseEntity<Animal>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
-    @DeleteMapping("deleteAnimal")
-    public String deleteAnimal(Integer id) throws SQLException {
-        animalDao.deleteAnimalById(id);
-        return "redirect:/animals";
+    @DeleteMapping("/deleteAnimal/{id}/{hash}")
+    public ResponseEntity<Animal> deleteAnimal(@PathVariable int id, @PathVariable String hash) throws SQLException {
+        hash = hash.replace("+", " ");
+        Animal animal = animalDao.getAnimalById(id);
+        if(animal.getHash().equals(hash)){
+            animalsService.deleteAnimalById(id);
+            return new ResponseEntity<Animal>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Animal>(HttpStatus.UNAUTHORIZED);
     }
 
-    @PutMapping("editAnimal")
-    public String editAnimal(Animal input, HttpServletRequest request)throws SQLException{
-        // Todo: create animal object
-        Animal animal = new Animal();
-
-        // Set all class fields
-        animalDao.updateAnimal(animal);
-        return null;
+    @PutMapping("/editAnimal")
+    public ResponseEntity<Animal> editAnimal(@RequestBody Animal animal, HttpServletRequest request)throws SQLException{
+        try{
+            animalDao.updateAnimal(animal);
+            return new ResponseEntity<Animal>(HttpStatus.OK);
+        }catch (SQLException e){
+            return new ResponseEntity<Animal>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
 
 

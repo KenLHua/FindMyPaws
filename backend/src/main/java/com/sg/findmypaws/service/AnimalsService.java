@@ -8,10 +8,13 @@ import com.sg.findmypaws.model.Animal;
 import com.sg.findmypaws.model.Owner;
 import com.sg.findmypaws.model.Sighting;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,8 +95,9 @@ public class AnimalsService {
                 System.err.println("Could not delete "+sighting.getId());
             }
         }
-        ownerDao.deleteOwnerById(getOwnerForAnimal(animal).getId());
         animalDao.deleteAnimalById(animal.getId());
+        ownerDao.deleteOwnerById(getOwnerForAnimal(animal).getId());
+
     }
 
 
@@ -102,5 +106,29 @@ public class AnimalsService {
         int ownerId =jdbc.queryForObject(SELECT_OWNERID_FOR_ANIMAL, Integer.class, animal.getId());
         Owner owner = ownerDao.getOwnerById(ownerId);
         return owner;
+    }
+    public Animal addAnimal(Animal animal) throws SQLIntegrityConstraintViolationException, SQLException{
+        Owner owner = animal.getOwner();
+        // Make sure owner exists
+        if(owner == null|| ownerDao.getOwnerById(owner.getId()) == null){
+            throw new SQLIntegrityConstraintViolationException("Owner does not exist for Animal");
+        }
+
+        animal = animalDao.addAnimal(animal);
+        try {
+            return this.getAnimalById(animal.getId());
+        }catch (SQLException e){
+            throw new SQLException("Could not retrieve newly created animal");
+        }
+
+
+
+    }
+    public List<Animal> getAllAnimals(){
+        List<Animal> animals = animalDao.getAllAnimals();
+        for(Animal an : animals){
+            an.setOwner(this.getOwnerForAnimal(an));
+        }
+        return animals;
     }
 }
