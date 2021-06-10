@@ -229,4 +229,9 @@ class AnimalDaoImplTest {
         assertTrue(animals.contains(animal));
         assertTrue(animals.contains(animal2));
     }
+
+    @Test
+    void serviceDelete(){
+
+    }
 }

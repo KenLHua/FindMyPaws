@@ -65,7 +65,7 @@ VALUES
 ("Sookie", true, "boxer", "", false, 42, 42, 12, 2, '948498494894oeoeuoaaauui8meueue84984u9494h', 'big boi', 'boxer.jpg', 3, NOW(),"green");
 
 INSERT INTO locations (
-	name,
+	`name`,
     address,
     longitude,
     latitude,
