@@ -4,6 +4,7 @@ import com.sg.findmypaws.dao.AnimalDao;
 import com.sg.findmypaws.dao.LocationDao;
 import com.sg.findmypaws.dao.OwnerDao;
 import com.sg.findmypaws.dao.SightingDao;
+import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Sighting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,6 +30,7 @@ public class LocationsService {
     @Autowired
     JdbcTemplate jdbc;
 
+
     public void deleteLocationById(int id){
         List<Sighting> sightings =  sightingDao.getAllSightingsByLocId(id);
         for(Sighting sighting: sightings){
@@ -38,5 +40,9 @@ public class LocationsService {
             }
         }
         locationDao.deleteLocationById(id);
+    }
+
+    public List<Location> getAllLocations(){
+        return locationDao.getAllLocations();
     }
 }
