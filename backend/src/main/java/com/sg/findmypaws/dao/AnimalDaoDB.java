@@ -64,7 +64,6 @@ public class AnimalDaoDB implements AnimalDao{
     public void updateAnimal(Animal animal) {
         final String UPDATE_ANIMAL = "UPDATE animals SET name = ?, nametag=?, species=?, breed=?, female=?, " +
                 "height=?, weight=?, age=?, status=?, hash=?, description=?, image=?, ownerId=?, date=?, color=? WHERE id = ?";
-        System.out.println("Update" + animal);
         jdbc.update(UPDATE_ANIMAL,
                 animal.getName(), animal.hasNameTag(),
                 animal.getSpecies(), animal.getBreed(),
