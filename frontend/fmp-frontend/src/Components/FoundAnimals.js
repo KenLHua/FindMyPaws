@@ -17,15 +17,15 @@ class FoundAnimals extends Component {
                         <h3>Found Animals<hr /></h3>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-6">
-                        <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
-                        <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
-                    </div>
-                    <div className="col-6">
-                        <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
-                        <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
-                    </div>
+                <div className="row" id="foundAnimals">
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
+                    <Animal name="Fido" dateFound="06/09/2021" currentLocation="test address" />
                 </div>
             </div>
         )

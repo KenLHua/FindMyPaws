@@ -18,26 +18,16 @@ class LostAnimals extends Component {
                     </div>
                 </div>
                 <div className="row mh-30" id="lostAnimals">
-                    <div className="col-6">
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                    </div>
-                    <div className="col-6">
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                    </div>
-                    <div className="col-6">
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                    </div>
-                    <div className="col-6">
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                    </div>
-                    <div className="col-6">
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                        <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
-                    </div>
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
+                    <Animal name="Fido" dateLost="06/01/2021" lastSeen="27 W 142nd St, Harvey, Illinois(IL), 60426" dateFound="" />
                 </div>
             </div>
         )

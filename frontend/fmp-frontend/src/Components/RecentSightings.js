@@ -19,17 +19,15 @@ class RecentSightings extends Component {
                         <h3>Recent Sightings<hr /></h3>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-12 mt-2">
-                        <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                        {/* <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" /> */}
-                    </div>
-                    <div className="col-12 mt-2">
-                        <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    </div>
-                    <div className="col-12 mt-2">
-                        <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    </div>
+                <div className="row" id="recentSightings">
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
                 </div>
             </div>
         )
