@@ -112,7 +112,7 @@ class Animal extends Component {
                     </button>
                     <div>
                         <Modal show={this.state.show} handleClose={this.hideModal}>
-                            <div className="container mt-3">
+                            <div className="container">
                                 <div className="row">
                                     <div className="col-12">
                                         <h2>{this.state.name}</h2>
@@ -247,7 +247,7 @@ class Animal extends Component {
                     </button>
                     <div>
                         <Modal show={this.state.show} handleClose={this.hideModal}>
-                            <div className="container mt-3">
+                            <div className="container">
                                 <div className="row">
                                     <div className="col-12">
                                         <h2>{this.state.name}</h2>
