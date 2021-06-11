@@ -8,6 +8,14 @@ class Animal extends Component {
             id: props.id,
             name: props.name,
             owner: props.owner,
+            gender: props.gender,
+            height: props.height,
+            weight: props.weight,
+            color: props.color,
+            species: props.species,
+            breed: props.breed,
+            description: props.description,
+            tag: props.tag,
             dateLost: props.dateLost,
             lastSeen: props.lastSeen,
             dateFound: props.dateFound,
@@ -16,6 +24,9 @@ class Animal extends Component {
         };
         this.showModal = this.showModal.bind(this)
         this.hideModal = this.hideModal.bind(this)
+        this.getGender = this.getGender.bind(this)
+        this.genderJSX = this.getGender(this.state.gender)
+        this.getJSX = this.getJSX.bind(this)
     }
 
     showModal = () => {
@@ -25,6 +36,34 @@ class Animal extends Component {
 
     hideModal = () => {
         this.setState({ show: false })
+    }
+
+    getGender(gender) {
+        if (gender) {
+            return (
+                <h5>Female</h5>
+            )
+        }
+        else {
+            return (
+                <h5>Male</h5>
+            )
+        }
+    }
+
+    // not functional
+    getJSX(str) {
+        console.log(str)
+        if (typeof(str) !== null && typeof(str) !== undefined) {
+            return (
+                <h5>{str}</h5>
+            )
+        }
+        else {
+            return (
+                <h5>Not found</h5>
+            )
+        }
     }
 
     render() {
@@ -91,7 +130,10 @@ class Animal extends Component {
                                                         Breed:
                                                     </h5>
                                                     <h5>
-                                                        Had tag:
+                                                        Color:
+                                                    </h5>
+                                                    <h5>
+                                                        Gender:
                                                     </h5>
                                                     <h5>
                                                         Height:
@@ -111,7 +153,10 @@ class Animal extends Component {
                                                         {this.state.breed}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.tag}
+                                                        {this.state.color}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.genderJSX}
                                                     </h5>
                                                     <h5>
                                                         {this.state.height}
@@ -126,7 +171,7 @@ class Animal extends Component {
                                                 <div className="col-12">
                                                     <hr />
                                                     <h3>
-                                                        {this.state.owner}
+                                                        Owner Information
                                                     </h3>
                                                     <hr />
                                                 </div>
@@ -134,10 +179,17 @@ class Animal extends Component {
                                                     <h5>
                                                         Phone: 
                                                     </h5>
-                                                    <br />
+                                                    <h5>
+                                                        Email: 
+                                                    </h5>
                                                 </div>
-                                                <div className="col-6">
-                                                    {this.state.phone}
+                                                <div className="col-6 text-right">
+                                                    <h5>
+                                                        (###) ###-####
+                                                    </h5>
+                                                    <h5>
+                                                        example@email.com
+                                                    </h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,8 +245,92 @@ class Animal extends Component {
                     </button>
                     <div>
                         <Modal show={this.state.show} handleClose={this.hideModal}>
-                            <p>{this.state.name}</p>
-                            <hr />
+                            <div className="container mt-3">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <h2>{this.state.name}</h2>
+                                        <hr />
+                                    </div>
+                                    <div className="col-6">
+                                        <img className="img-fluid rounded" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg"></img>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="container">
+                                            <div className="row">
+                                                <div className="col-6 text-left">
+                                                    <h5>
+                                                        Species:
+                                                    </h5>
+                                                    <h5>
+                                                        Breed:
+                                                    </h5>
+                                                    <h5>
+                                                        Color:
+                                                    </h5>
+                                                    <h5>
+                                                        Gender:
+                                                    </h5>
+                                                    <h5>
+                                                        Height:
+                                                    </h5>
+                                                    <h5>
+                                                        Weight:
+                                                    </h5>
+                                                    <h5>
+                                                        Description:
+                                                    </h5>
+                                                </div>
+                                                <div className="col-6 text-right">
+                                                    <h5>
+                                                        {this.state.species}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.state.breed}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.state.color}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.genderJSX}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.state.height}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.state.weight}
+                                                    </h5>
+                                                    <h5>
+                                                        {this.state.description}
+                                                    </h5>
+                                                </div>
+                                                <div className="col-12">
+                                                    <hr />
+                                                    <h3>
+                                                        Owner Information
+                                                    </h3>
+                                                    <hr />
+                                                </div>
+                                                <div className="col-6 text-left">
+                                                    <h5>
+                                                        Phone: 
+                                                    </h5>
+                                                    <h5>
+                                                        Email: 
+                                                    </h5>
+                                                </div>
+                                                <div className="col-6 text-right">
+                                                    <h5>
+                                                        (###) ###-####
+                                                    </h5>
+                                                    <h5>
+                                                        example@email.com
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </Modal>
                     </div>
                 </div>
