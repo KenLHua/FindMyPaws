@@ -1,29 +1,43 @@
 import React, { Component } from 'react'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom"
+import AnimalPage from "./AnimalPage"
 
 class Animal extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: props.id,
             name: props.name,
             dateLost: props.dateLost,
             lastSeen: props.lastSeen,
             dateFound: props.dateFound,
             currentLocation: props.currentLocation
         }
+
+        this.animalModal = this.animalModal.bind(this)
+    }
+
+    animalModal(id) {
+
     }
 
     render() {
         if (this.state.dateFound == "") {
             return (
                 <div className="col-6">
-                    <button className="btn p-0 mb-3 ml-0 mr-0">
+                    <button className="btn p-0 mb-3 ml-0 mr-0" onClick={() => this.animalModal(this.state.id)}>
                         <div className="card border border-dark m-0">
                             <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
                             <div className="card-body">
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-4 rounded p-0">
-                                            <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
+                                            <img className="img-fluid rounded" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
                                         </div>
                                         <div className="col-8">
                                             <div className="container">
@@ -67,7 +81,7 @@ class Animal extends Component {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-4 rounded p-0">
-                                            <img className="img-fluid" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
+                                            <img className="img-fluid rounded" src="https://www.guidedogs.org/wp-content/uploads/2019/11/website-donate-mobile.jpg" />
                                         </div>
                                         <div className="col-8">
                                             <div className="container">

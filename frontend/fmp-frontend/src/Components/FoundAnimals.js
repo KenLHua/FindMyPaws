@@ -9,6 +9,7 @@ class FoundAnimals extends Component {
             composites: []
         }
     }
+    
     componentDidMount() {
         const filter = {
             "daysAgo": 30,
