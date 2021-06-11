@@ -16,7 +16,7 @@ class RecentSightings extends Component {
     componentDidMount() {
         const filter = {
             "daysAgo": 30,
-            "loc": { "longitude": 80, "latitude": -160 },
+            "loc": { "longitude": 42, "latitude": -88 },
             "mockAnimal": {},
             "radius": 40000
         };
