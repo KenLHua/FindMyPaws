@@ -30,8 +30,6 @@ class AnimalPage extends Component {
         }
     }
 
-    
-
     render() {
         return (
             <div className="container-fluid mt-5 border border-dark bg-light">

@@ -43,7 +43,7 @@ class FoundAnimals extends Component {
                 <div className="row" id="foundAnimals">
                     {
                         this.state.composites.map(c =>
-                            <Animal onClick={this.showModal} key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateFound={c.lastSeen} currentLocation={c.lat + ", " + c.lon} />
+                            <Animal onClick={this.showModal} key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateFound={c.lastSeen} currentLocation={c.lat + ", " + c.lon} id={c.animalId} />
 
                         )
 
