@@ -132,6 +132,24 @@ public class Composite {
     private int age;
     private Boolean female;
     private Boolean nameTag;
+    private String phone;
+    private String email;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getAnimalId() {
         return animalId;
@@ -174,7 +192,7 @@ public class Composite {
         this.lon = lon;
     }
 
-    public Composite(String name, LocalDate lastSeen, float lat, float lon, int animalId, LocalDate date, Integer status, String breed, String species, String color, String description, String hash, String image, int height, int weight, int age, Boolean female, Boolean nameTag) {
+    public Composite(String name, LocalDate lastSeen, float lat, float lon, int animalId, LocalDate date, Integer status, String breed, String species, String color, String description, String hash, String image, int height, int weight, int age, Boolean female, Boolean nameTag, String phone, String email) {
         this.name = name;
         this.lastSeen = lastSeen;
         this.lat = lat;
@@ -193,5 +211,7 @@ public class Composite {
         this.age = age;
         this.female = female;
         this.nameTag = nameTag;
+        this.phone = phone;
+        this.email = email;
     }
 }
