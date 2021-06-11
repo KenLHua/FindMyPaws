@@ -9,7 +9,7 @@ class LostAnimals extends Component {
             composites: []
         }
     }
-    
+
     componentDidMount() {
         const filter = {
             "daysAgo": 30,
@@ -41,7 +41,7 @@ class LostAnimals extends Component {
                 <div className="row" id="lostAnimals">
                     {
                         this.state.composites.map(c =>
-                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + " " + c.lon} dateFound="" />)
+                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + ", " + c.lon} dateFound="" />)
                     }
                 </div>
             </div>

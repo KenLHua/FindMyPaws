@@ -6,6 +6,7 @@ import {
     Link
 } from "react-router-dom"
 import AnimalPage from "./AnimalPage"
+import Modal from "./Modal"
 
 class Animal extends Component {
     constructor(props) {
@@ -16,11 +17,20 @@ class Animal extends Component {
             dateLost: props.dateLost,
             lastSeen: props.lastSeen,
             dateFound: props.dateFound,
-            currentLocation: props.currentLocation
-        }
-
-        this.animalModal = this.animalModal.bind(this)
+            currentLocation: props.currentLocation,
+            show: false
+        };
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
     }
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+
+    hideModal = () => {
+        this.setState({ show: false });
+    };
 
     animalModal(id) {
 
@@ -30,7 +40,8 @@ class Animal extends Component {
         if (this.state.dateFound == "") {
             return (
                 <div className="col-6">
-                    <button className="btn p-0 mb-3 ml-0 mr-0" onClick={() => this.animalModal(this.state.id)}>
+                    <button className="btn p-0 mb-3 ml-0 mr-0" onClick={this.showModal}>
+
                         <div className="card border border-dark m-0">
                             <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
                             <div className="card-body">
@@ -68,14 +79,20 @@ class Animal extends Component {
                             </div>
                         </div>
                     </button>
+                    <div>
+                        <Modal show={this.state.show} handleClose={this.hideModal}>
+                            <p>Modal</p>
+                        </Modal>
+                    </div>
                 </div>
+
             )
         }
         else {
             return (
                 <div className="col-6">
                     <button className="btn p-0 mb-3 ml-0 mr-0">
-                        <div className="card border border-dark m-0"> 
+                        <div className="card border border-dark m-0">
                             <div className="card-header border-bottom border-dark text-center pb-0"><h3>{this.state.name}</h3></div>
                             <div className="card-body">
                                 <div className="container">

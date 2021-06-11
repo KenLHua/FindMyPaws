@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Animal from './Animal';
 import axios from 'axios';
+import Modal from './Modal';
 
 class FoundAnimals extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            composites: []
-        }
+            composites: [],
+        };
     }
-    
+
+
     componentDidMount() {
         const filter = {
             "daysAgo": 30,
@@ -41,10 +43,14 @@ class FoundAnimals extends Component {
                 <div className="row" id="foundAnimals">
                     {
                         this.state.composites.map(c =>
-                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateFound={c.lastSeen} currentLocation={c.lat + " " + c.lon} />)
+                            <Animal onClick={this.showModal} key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateFound={c.lastSeen} currentLocation={c.lat + ", " + c.lon} />
+
+                        )
+
                     }
+
                 </div>
-            </div>
+            </div >
         )
     }
 }
