@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import Sighting from "./Sighting"
+import React, { Component } from 'react';
+import Sighting from "./Sighting";
+import axios from "axios";
 
 class RecentSightings extends Component {
     constructor(props) {
@@ -7,8 +8,29 @@ class RecentSightings extends Component {
         this.state = {
             animalName: props.animalName,
             animalDateLost: props.animalDateLost,
-            locationSighted: props.locationSighted
+            locationSighted: props.locationSighted,
+            sComposites: []
         }
+    }
+
+    componentDidMount() {
+        const filter = {
+            "daysAgo": 30,
+            "loc": { "longitude": 80, "latitude": -160 },
+            "mockAnimal": {},
+            "radius": 40000
+        };
+
+        axios({
+            method: 'POST',
+            url: 'http://localhost:8080/api/composite/all',
+            data: filter
+        })
+            .then(res => {
+                const sComposites = res.data;
+                console.log(sComposites);
+                this.setState({ sComposites });
+            })
     }
 
     render() {
@@ -19,15 +41,13 @@ class RecentSightings extends Component {
                         <h3>Recent Sightings<hr /></h3>
                     </div>
                 </div>
+
                 <div className="row" id="recentSightings">
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
-                    <Sighting animalName="Fido" location="test sighting location" date="mm/dd/yyyy" />
+                    {
+                        this.state.sComposites.map(c =>
+                            <Sighting key={c.lat + c.lon + c.name + c.lastSeen} animalName={c.name} location={c.lat + " " + c.lon} date={c.lastSeen} />
+                        )
+                    }
                 </div>
             </div>
         )

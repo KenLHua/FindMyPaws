@@ -55,4 +55,16 @@ public class CompositeController {
         }
         return composites;
     }
+
+    @PostMapping("/all")
+    public List<Composite> getAllUniqueComposites(@RequestBody Filter filter) throws SQLException {
+        List<Sighting> sightings = compositeService.getRecentSightingForAnimals(filter.loc, filter.radius, filter.daysAgo);
+        List<Composite> composites = new ArrayList<>();
+        for (Sighting s : sightings) {
+            Animal a = animalDao.getAnimalById(s.getAnimalId());
+            Location l = LDDB.getLocationById(s.getLocationId());
+            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude()));
+        }
+        return composites;
+    }
 }

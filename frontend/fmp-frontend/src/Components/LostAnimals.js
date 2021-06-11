@@ -34,13 +34,13 @@ class LostAnimals extends Component {
             <div className="container ml-0 border border-dark rounded bg-light">
                 <div className="row">
                     <div className="col-12 mt-3">
-                        <h3>Found Animals<hr /></h3>
+                        <h3>Lost Animals<hr /></h3>
                     </div>
                 </div>
                 <div className="row" id="lostAnimals">
                     {
                         this.state.composites.map(c =>
-                            <Animal name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + " " + c.lon} dateFound="" />)
+                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + " " + c.lon} dateFound="" />)
                     }
                 </div>
             </div>
