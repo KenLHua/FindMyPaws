@@ -2,10 +2,13 @@ package com.sg.findmypaws.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sg.findmypaws.dao.AnimalDao;
+import com.sg.findmypaws.dao.LocationDaoDB;
 import com.sg.findmypaws.model.Animal;
+import com.sg.findmypaws.model.Filter;
 import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Sighting;
 import com.sg.findmypaws.service.AnimalsService;
+import com.sg.findmypaws.service.CompositeService;
 import com.sg.findmypaws.service.LocationsService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import java.nio.file.AccessDeniedException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,6 +38,10 @@ public class AnimalController {
 
     @Autowired
     LocationsService locationsService;
+
+
+
+
 
 
     @GetMapping("/animals")
