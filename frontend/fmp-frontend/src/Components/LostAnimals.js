@@ -41,7 +41,7 @@ class LostAnimals extends Component {
                 <div className="row" id="lostAnimals">
                     {
                         this.state.composites.map(c =>
-                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + ", " + c.lon} dateFound="" id={c.animalId} breed={c.breed} species={c.species} color={c.color} height={c.height} weight={c.weight} gender={c.female} tag={c.nameTag} description={c.description}/>)
+                            <Animal key={c.lat + c.lon + c.name + c.lastSeen} name={c.name} dateLost={c.lastSeen} lastSeen={c.lat + ", " + c.lon} dateFound="" id={c.animalId} breed={c.breed} species={c.species} color={c.color} height={c.height} weight={c.weight} gender={c.female} tag={c.nameTag} description={c.description} phone={c.phone} email={c.email} />)
                     }
                 </div>
             </div>

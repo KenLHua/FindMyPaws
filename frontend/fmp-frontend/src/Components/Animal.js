@@ -16,6 +16,8 @@ class Animal extends Component {
             breed: props.breed,
             description: props.description,
             tag: props.tag,
+            phone: props.phone,
+            email: props.email,
             dateLost: props.dateLost,
             lastSeen: props.lastSeen,
             dateFound: props.dateFound,
@@ -54,14 +56,14 @@ class Animal extends Component {
     // not functional
     getJSX(str) {
         console.log(str)
-        if (typeof(str) !== null && typeof(str) !== undefined) {
+        if (typeof str !== null && typeof str !== undefined && str !== "") {
             return (
                 <h5>{str}</h5>
             )
         }
         else {
             return (
-                <h5>Not found</h5>
+                <h5>Not Found</h5>
             )
         }
     }
@@ -122,7 +124,7 @@ class Animal extends Component {
                                     <div className="col-6">
                                         <div className="container">
                                             <div className="row">
-                                                <div className="col-6 text-left">
+                                                <div className="col-3 text-left">
                                                     <h5>
                                                         Species:
                                                     </h5>
@@ -145,27 +147,27 @@ class Animal extends Component {
                                                         Description:
                                                     </h5>
                                                 </div>
-                                                <div className="col-6 text-right">
+                                                <div className="col-9 text-right">
                                                     <h5>
-                                                        {this.state.species}
+                                                        {this.getJSX(this.state.species)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.breed}
+                                                        {this.getJSX(this.state.breed)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.color}
+                                                        {this.getJSX(this.state.color)}
                                                     </h5>
                                                     <h5>
                                                         {this.genderJSX}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.height}
+                                                        {this.getJSX(this.state.height)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.weight}
+                                                        {this.getJSX(this.state.weight)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.description}
+                                                        {this.getJSX(this.state.description)}
                                                     </h5>
                                                 </div>
                                                 <div className="col-12">
@@ -175,7 +177,7 @@ class Animal extends Component {
                                                     </h3>
                                                     <hr />
                                                 </div>
-                                                <div className="col-6 text-left">
+                                                <div className="col-3 text-left">
                                                     <h5>
                                                         Phone: 
                                                     </h5>
@@ -183,12 +185,12 @@ class Animal extends Component {
                                                         Email: 
                                                     </h5>
                                                 </div>
-                                                <div className="col-6 text-right">
+                                                <div className="col-9 text-right">
                                                     <h5>
-                                                        (###) ###-####
+                                                        {this.getJSX(this.state.phone)}
                                                     </h5>
                                                     <h5>
-                                                        example@email.com
+                                                        {this.getJSX(this.state.email)}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -257,7 +259,7 @@ class Animal extends Component {
                                     <div className="col-6">
                                         <div className="container">
                                             <div className="row">
-                                                <div className="col-6 text-left">
+                                                <div className="col-3 text-left">
                                                     <h5>
                                                         Species:
                                                     </h5>
@@ -280,27 +282,27 @@ class Animal extends Component {
                                                         Description:
                                                     </h5>
                                                 </div>
-                                                <div className="col-6 text-right">
+                                                <div className="col-9 text-right">
                                                     <h5>
-                                                        {this.state.species}
+                                                        {this.getJSX(this.state.species)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.breed}
+                                                        {this.getJSX(this.state.breed)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.color}
+                                                        {this.getJSX(this.state.color)}
                                                     </h5>
                                                     <h5>
                                                         {this.genderJSX}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.height}
+                                                        {this.getJSX(this.state.height)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.weight}
+                                                        {this.getJSX(this.state.weight)}
                                                     </h5>
                                                     <h5>
-                                                        {this.state.description}
+                                                        {this.getJSX(this.state.description)}
                                                     </h5>
                                                 </div>
                                                 <div className="col-12">
@@ -310,7 +312,7 @@ class Animal extends Component {
                                                     </h3>
                                                     <hr />
                                                 </div>
-                                                <div className="col-6 text-left">
+                                                <div className="col-3 text-left">
                                                     <h5>
                                                         Phone: 
                                                     </h5>
@@ -318,12 +320,12 @@ class Animal extends Component {
                                                         Email: 
                                                     </h5>
                                                 </div>
-                                                <div className="col-6 text-right">
+                                                <div className="col-9 text-right">
                                                     <h5>
-                                                        (###) ###-####
+                                                        {this.getJSX(this.state.phone)}
                                                     </h5>
                                                     <h5>
-                                                        example@email.com
+                                                        {this.getJSX(this.state.email)}
                                                     </h5>
                                                 </div>
                                             </div>
