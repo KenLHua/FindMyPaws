@@ -8,6 +8,16 @@ public class Composite {
     private LocalDate lastSeen;
     private float lat;
     private float lon;
+    private int animalId;
+
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
+    }
+
 
     public String getName() {
         return name;
@@ -41,10 +51,11 @@ public class Composite {
         this.lon = lon;
     }
 
-    public Composite(String name, LocalDate lastSeen, float lat, float lon) {
+    public Composite(String name, LocalDate lastSeen, float lat, float lon, int animalId) {
         this.name = name;
         this.lastSeen = lastSeen;
         this.lat = lat;
         this.lon = lon;
+        this.animalId = animalId;
     }
 }
