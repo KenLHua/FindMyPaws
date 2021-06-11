@@ -6,8 +6,7 @@ import {
     Link
 } from "react-router-dom"
 import Home from "./Components/Home"
-import AnimalPage from './Components/AnimalPage'
-
+import About from "./Components/About"
 
 
 class App extends Component {
@@ -65,6 +64,13 @@ class App extends Component {
                             </h1>
                         </Link>
                     </a>
+                    <a id="navButton" className="navbar-brand mb-0 mt-1 rounded pl-2 pr-2 pb-0">
+                        <Link to="/about" style={{ color: 'black', textDecoration: 'none' }}>
+                            <h2>
+                                About
+                            </h2>
+                        </Link>
+                    </a>
                     <div id="themes" className="float-right">
                         <button className="btn bg-light rounded-circle btn-lg" onClick={this.changeTheme}>
                             {this.themeIcon}
@@ -75,6 +81,9 @@ class App extends Component {
                 <Switch>
                     <Route path="/home">
                         <Home />
+                    </Route>
+                    <Route path="/about">
+                        <About />
                     </Route>
                 </Switch>
             </Router>
