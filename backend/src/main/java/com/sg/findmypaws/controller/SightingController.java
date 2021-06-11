@@ -5,6 +5,7 @@ import com.sg.findmypaws.model.Animal;
 import com.sg.findmypaws.model.Filter;
 import com.sg.findmypaws.model.Location;
 import com.sg.findmypaws.model.Sighting;
+import com.sg.findmypaws.service.CompositeService;
 import com.sg.findmypaws.service.SightingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +22,13 @@ public class SightingController {
 
 private final SightingsService service;
 private final SightingDaoDB daoDB;
+private final CompositeService compositeService;
 
     @Autowired
-    public SightingController(SightingsService service, SightingDaoDB daoDB) {
+    public SightingController(SightingsService service, SightingDaoDB daoDB, CompositeService compositeService) {
         this.service = service;
         this.daoDB = daoDB;
+        this.compositeService = compositeService;
     }
 
     @PostMapping("/add")
@@ -70,4 +73,8 @@ private final SightingDaoDB daoDB;
     public void deleteSighting(@PathVariable int id) throws SQLException {
         daoDB.deleteSightingById(id);
 }
+    @GetMapping("/filtered/allRecent")
+    public List<Sighting> getRecentSightingForAnimalWithFilters(@RequestBody Filter filter){
+        return compositeService.getRecentSightingForAnimals(filter.loc, filter.radius, filter.daysAgo);
+    }
 }

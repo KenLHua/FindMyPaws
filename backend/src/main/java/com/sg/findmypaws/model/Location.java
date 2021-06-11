@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Location {
     private int id;
     private String name;
-    private float latitude;
-    private float longitude;
+    private Float latitude;
+    private Float longitude;
     private String address;
     private String description;
 
@@ -26,7 +26,7 @@ public class Location {
         this.name = name;
     }
 
-    public float getLatitude() {
+    public Float getLatitude() {
         return latitude;
     }
 
@@ -34,7 +34,7 @@ public class Location {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Float getLongitude() {
         return longitude;
     }
 

@@ -45,4 +45,10 @@ public class LocationsService {
     public List<Location> getAllLocations(){
         return locationDao.getAllLocations();
     }
+
+    public boolean isLocationValid(Location loc){
+        if(loc.getLatitude() != null && loc.getLongitude() != null && loc.getAddress() != null)
+            return true;
+        return false;
+    }
 }

@@ -46,13 +46,16 @@ public class SightingsService {
         if (daysAgo != -1 && ! sightings.isEmpty()) {
             LocalDate now = LocalDate.now();
             LocalDate past = now.minusDays(daysAgo);
-            sightings.removeIf(s -> ! betweenTwoDates(s.date, now, past));
+            sightings.removeIf(s -> {
+                return !betweenTwoDates(s.date, now, past);
+            });
         }
         System.out.println("sightings : " + sightings);
         if (mockAnimal != null && ! sightings.isEmpty())
         {
-            sightings.removeIf(s -> ! animalsService.compareAnimal(
-                    animalDaoDB.getAnimalById(s.getAnimalId()), mockAnimal));
+            sightings.removeIf(s -> {
+                return ! animalsService.compareAnimal(animalDaoDB.getAnimalById(s.getAnimalId()), mockAnimal);});
+
         }
 
         return sightings;

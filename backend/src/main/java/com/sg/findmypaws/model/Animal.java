@@ -8,7 +8,7 @@ public class Animal {
     private int id;
     private Owner owner;
     private LocalDate date;
-    private int status;
+    private Integer status;
 
     private String name;
     private String breed;
@@ -71,7 +71,7 @@ public class Animal {
         this.species = species;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
