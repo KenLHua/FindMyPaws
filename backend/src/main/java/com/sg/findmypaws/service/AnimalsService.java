@@ -75,7 +75,7 @@ public class AnimalsService {
         if(filterAnimal.getWeight() > -1)
             weightMatch = filterAnimal.getWeight() == curr.getWeight();
         if(filterAnimal.getDate() != null)
-            dateMatch = curr.getDate().isAfter(filterAnimal.getDate());
+            dateMatch = curr.getDate().isAfter(filterAnimal.getDate()) || curr.getDate().isEqual(filterAnimal.getDate());
 
         return (nameMatch && speciesMatch && breedMatch && femaleMatch && colorMatch && heightMatch && weightMatch && nameTagMatch && dateMatch);
     }

@@ -60,7 +60,6 @@ public class AnimalController {
 
     @PostMapping("/addAnimal")
     public ResponseEntity<Animal> addAnimal(@RequestBody AnimalInputWrapper inputWrapper) throws DataIntegrityViolationException {
-        System.out.println(inputWrapper);
         Location location = inputWrapper.location;
         Animal animal = inputWrapper.animal;
         if(!locationsService.isLocationValid(location)){
@@ -122,7 +121,7 @@ public class AnimalController {
             return new ResponseEntity<Animal>(HttpStatus.NOT_FOUND);
         }
 
-        
+
 
         try{
             animalsService.updateAnimal(animal);
