@@ -36,7 +36,7 @@ public class CompositeController {
                 continue;
             }
             Location l = LDDB.getLocationById(s.getLocationId());
-            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId()));
+            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId(), a.getDate(), a.getStatus(), a.getBreed(), a.getSpecies(), a.getColor(), a.getDescription(), a.getHash(), a.getImage(), a.getHeight(), a.getWeight(), a.getAge(), a.isFemale(),  a.hasNameTag()));
         }
         return composites;
     }
@@ -50,8 +50,9 @@ public class CompositeController {
             if (a.getStatus() != 1) {
                 continue;
             }
+
             Location l = LDDB.getLocationById(s.getLocationId());
-            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId()));
+            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId(), a.getDate(), a.getStatus(), a.getBreed(), a.getSpecies(), a.getColor(), a.getDescription(), a.getHash(), a.getImage(), a.getHeight(), a.getWeight(), a.getAge(), a.isFemale(),  a.hasNameTag()));
         }
         return composites;
     }
@@ -63,7 +64,7 @@ public class CompositeController {
         for (Sighting s : sightings) {
             Animal a = animalDao.getAnimalById(s.getAnimalId());
             Location l = LDDB.getLocationById(s.getLocationId());
-            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId()));
+            composites.add(new Composite(a.getName(), s.getDate(), l.getLatitude(), l.getLongitude(), a.getId(), a.getDate(), a.getStatus(), a.getBreed(), a.getSpecies(), a.getColor(), a.getDescription(), a.getHash(), a.getImage(), a.getHeight(), a.getWeight(), a.getAge(), a.isFemale(),  a.hasNameTag()));
         }
         return composites;
     }
